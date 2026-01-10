@@ -25,7 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${rubik.variable} antialiased`}>
-        {children}
+        <div className="flex min-h-screen items-center justify-center bg-negroni font-sans dark:bg-orange-950">
+          <main className="min-h-screen w-full max-w-3xl py-32 px-16">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
