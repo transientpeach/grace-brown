@@ -1,3 +1,5 @@
+import { CustomLink } from "@/components";
+
 const Publications = () => {
   return (
     <div>
@@ -6,11 +8,11 @@ const Publications = () => {
         <h2>Peer-reviewed articles</h2>
         <p>
           Arpini, E., Stegemann, L. and <strong>Brown, G</strong>. (2021){" "}
-          <a href="https://www.ingentaconnect.com/content/stair/stair/2021/00000016/00000002/art00012">
+          <CustomLink href="https://www.ingentaconnect.com/content/stair/stair/2021/00000016/00000002/art00012">
             Countering Neoliberalism by Harnessing the Local State? The Role of
             Social Movements in Municipalist Campaigns. A Comparative Study of
             Argentina, Germany and the USA
-          </a>
+          </CustomLink>
           <em>St Antony’s International Review</em> 16(2): 225-252
         </p>
 
@@ -19,30 +21,30 @@ const Publications = () => {
         <p>
           <strong>Brown, G</strong>., Traill, H., Anderson, S., Shaw, D.,
           Cumbers, A., McMaster, R. (2023){" "}
-          <a href="https://eprints.gla.ac.uk/306031/1/306031.pdf">
+          <CustomLink href="https://eprints.gla.ac.uk/306031/1/306031.pdf">
             Good Food for All in Glasgow: An Interim Assessment of the Glasgow
             City Food Plan
-          </a>
+          </CustomLink>
         </p>
 
         <h2>Reviews and public writing</h2>
 
         <p>
           <strong>Brown, G</strong>. (2024){" "}
-          <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/bjir.12814">
+          <CustomLink href="https://onlinelibrary.wiley.com/doi/abs/10.1111/bjir.12814">
             Re-union: How bold labor reforms can repair, revitalize, and reunite
             the United States&nbsp;By&nbsp;David Madland,&nbsp;Ithaca, NY: ILR
             Press.&nbsp;2021.&nbsp;240&nbsp;pp. Price $29.95 (hbk). ISBN:
             978-1501755378.
-          </a>
+          </CustomLink>
           <em>British Journal of Industrial Relations</em> 62(4): 814-815
         </p>
 
         <p>
           <strong>Brown, G</strong>. (2022){" "}
-          <a href="https://tribunemag.co.uk/2022/11/new-yorks-fight-to-put-renewable-energy-in-public-hands">
+          <CustomLink href="https://tribunemag.co.uk/2022/11/new-yorks-fight-to-put-renewable-energy-in-public-hands">
             New York’s Fight to Put Renewable Energy in Public Hands
-          </a>{" "}
+          </CustomLink>{" "}
           <em>Tribune </em>
         </p>
       </div>
