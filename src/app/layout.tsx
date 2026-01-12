@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Rubik, Inter_Tight } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/Footer";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -25,10 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${rubik.variable} antialiased`}>
-        <div className="flex min-h-screen items-center justify-center bg-negroni font-sans dark:bg-orange-950">
-          <main className="min-h-screen w-full max-w-3xl py-32 px-16">
-            {children}
-          </main>
+        <div className="flex flex-col min-h-screen items-center w-full bg-negroni font-sans dark:bg-orange-950">
+          <main className="w-full max-w-6xl py-32 px-16">{children}</main>
+          <Footer />
         </div>
       </body>
     </html>
