@@ -49,18 +49,13 @@ jobs:
             VALID=true
           fi
 
-          # Release → develop or main
-          if [[ "$SOURCE_BRANCH" =~ ^release/ ]] && [[ "$TARGET_BRANCH" =~ ^(develop|main)$ ]]; then
-            VALID=true
-          fi
-
           # Hotfix → develop or main
           if [[ "$SOURCE_BRANCH" =~ ^hotfix/ ]] && [[ "$TARGET_BRANCH" =~ ^(develop|main)$ ]]; then
             VALID=true
           fi
 
-          # Develop → main (for final releases)
-          if [[ "$SOURCE_BRANCH" == "develop" ]] && [[ "$TARGET_BRANCH" == "main" ]]; then
+          # Release → main
+          if [[ "$SOURCE_BRANCH" =~ ^release/ ]] && [[ "$TARGET_BRANCH" == "main" ]]; then
             VALID=true
           fi
 
