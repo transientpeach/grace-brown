@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -21,6 +22,41 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+@utility prose-peach {
+  --tw-prose-body: #3d2817;
+  --tw-prose-headings: #2a1810;
+  --tw-prose-lead: #4d3520;
+  --tw-prose-links: #8b4513;
+  --tw-prose-bold: #2a1810;
+  --tw-prose-counters: #6b4423;
+  --tw-prose-bullets: #8b4513;
+  --tw-prose-hr: #d4a574;
+  --tw-prose-quotes: #2a1810;
+  --tw-prose-quote-borders: #d4a574;
+  --tw-prose-captions: #5d4028;
+  --tw-prose-code: #8b4513;
+  --tw-prose-pre-code: #f9e5d3;
+  --tw-prose-pre-bg: #3d2817;
+  --tw-prose-th-borders: #c9a572;
+  --tw-prose-td-borders: #d9b889;
+  --tw-prose-invert-body: #f9e5d3;
+  --tw-prose-invert-headings: #ffffff;
+  --tw-prose-invert-lead: #f2d4b8;
+  --tw-prose-invert-links: #ffb347;
+  --tw-prose-invert-bold: #ffffff;
+  --tw-prose-invert-counters: #d9b889;
+  --tw-prose-invert-bullets: #c9a572;
+  --tw-prose-invert-hr: #6b4423;
+  --tw-prose-invert-quotes: #ffe8d1;
+  --tw-prose-invert-quote-borders: #8b6846;
+  --tw-prose-invert-captions: #d9b889;
+  --tw-prose-invert-code: #ffb347;
+  --tw-prose-invert-pre-code: #f9e5d3;
+  --tw-prose-invert-pre-bg: rgb(45 30 20 / 80%);
+  --tw-prose-invert-th-borders: #8b6846;
+  --tw-prose-invert-td-borders: #6b4423;
 }
 
 body {

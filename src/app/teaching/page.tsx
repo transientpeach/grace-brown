@@ -2,7 +2,7 @@ const Teaching = () => {
   return (
     <div>
       <h1>Teaching</h1>
-      <ul>
+      <ul className="not-prose">
         <li>
           <h2>Course co-convenor</h2>
           <p>Global Energy Politics (POLITIC4168)</p>
