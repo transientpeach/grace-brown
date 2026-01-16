@@ -1,55 +1,19 @@
 import Image from "next/image";
+import HomeMdx from "@/content/home.mdx";
 
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-between gap-4 sm:items-start sm:flex-row">
-      <div className="">
-        <h1 className="h1">
-          I’m Grace Brown, a researcher and educator working towards a future
-          where communities control the systems that shape our world.
-        </h1>
-
-        <h3 className="--font-rubik text-sm font-light uppercase">
-          Postdoctoral Researcher in Global Remunicipalisation, University of
-          Glasgow
-        </h3>
-
-        <p>
-          {" "}
-          passionate about reshaping energy futures and ensuring communities can
-          transform the systems that shape their lives.
-        </p>
-
-        <p>
-          I’m passionate about building more just, sustainable, and equitable
-          futures through bold ideas and collective action.
-        </p>
-
-        <p>My research TKTK. </p>
-
-        <p>
-          I’m a postdoctoral researcher specialising in energy politics, with a
-          focus on energy justice, democracy, and transitions. I’m passionate
-          about critical scholarship and collaborative projects, also exploring
-          themes of municipalism, social movements, and sustainable futures
-          through teaching, writing, and community engagement.
-        </p>
-
-        <p>
-          I am an Advisory Board member for{" "}
-          <a href="https://www.publicgrids.org/">Public Grids</a>, the
-          organisation bringing grassroots organising and sector-leading
-          expertise together&nbsp;to expand public power across the United
-          States, from campaign to implementation.
-        </p>
+      <div className="flex-1">
+        <HomeMdx />
       </div>
       <div className="flex">
-        <div className="h-40 w-40 overflow-hidden">
+        <div className="h-64 w-64 overflow-hidden not-prose">
           <Image
             src="/images/photobooth-cropped.png"
             alt="grace brown photobooth"
-            height={160}
-            width={160}
+            height={256}
+            width={256}
           />
         </div>
       </div>

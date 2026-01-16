@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  basePath: isProd ? "/next-starter-blog" : "",
+  distDir: "dist",
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+});
+
+// Wrap your config with MDX
+export default withMDX(nextConfig);

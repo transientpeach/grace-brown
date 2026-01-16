@@ -3,7 +3,7 @@ import { CustomLink } from "@/components";
 export const Footer = () => {
   return (
     <footer className="w-full flex flex-col items-center mt-2 border-t-neutral-700 dark:border-t-neutral-50 border-t">
-      <div className="w-full max-w-6xl px-16 pt-2 flex gap-2 justify-between  flex-col md:flex-row">
+      <div className="w-full max-w-4xl px-16 pt-2 flex gap-2 justify-between  flex-col md:flex-row">
         <div>
           <p>Grace Brown (she/her)</p>
         </div>

@@ -1,21 +1,29 @@
 import { CustomLink } from "@/components";
+import { metadata as homeMetadata } from "@/content/home.mdx";
+import { getContentFileNameList } from "@/utils/getContentFileNameList";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/teaching", label: "Teaching" },
-  { href: "/research-projects", label: "Research Projects" },
-  { href: "/publications", label: "Publications" },
-  { href: "/cv", label: "CV" },
-] as const;
+const contentFileNameList = getContentFileNameList();
 
-export const Navigation = () => {
+export const Navigation = async () => {
+  const navItemsList = await Promise.all(
+    contentFileNameList.map(async (fileName) => {
+      const slug = fileName.replace(".mdx", "");
+      const page = await import(`@/content/main/${fileName}`);
+      const title = page.metadata?.title ?? slug;
+      return { slug, title };
+    })
+  );
+
   return (
     <nav className="w-full py-2">
       <ul className="w-full flex gap-2">
-        {navLinks.map(({ href, label }, index) => {
+        <li className="mr-auto">
+          <CustomLink href="/">{homeMetadata.title}</CustomLink>
+        </li>
+        {navItemsList.map(({ slug, title }) => {
           return (
-            <li className={`${index === 0 ? "mr-auto" : ""}`} key={index}>
-              <CustomLink href={href}>{label}</CustomLink>
+            <li key={slug}>
+              <CustomLink href={`/${slug}`}>{title}</CustomLink>
             </li>
           );
         })}

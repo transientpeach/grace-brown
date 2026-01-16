@@ -18,17 +18,17 @@ export const metadata: Metadata = {
   description: "researcher and educator",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${rubik.variable} antialiased`}>
         <div className="flex flex-col min-h-screen items-center w-full bg-negroni font-sans dark:bg-orange-950 ">
           <Header />
-          <main className="w-full max-w-6xl py-32 px-16 prose prose-peach dark:prose-invert md:prose-lg">
+          <main className="w-full max-w-4xl py-16 px-16 prose prose-peach dark:prose-invert md:prose-lg">
             {children}
           </main>
           <Footer />
@@ -36,4 +36,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
