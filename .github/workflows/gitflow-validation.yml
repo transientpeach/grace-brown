@@ -1,0 +1,115 @@
+name: Gitflow Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  validate-gitflow:
+    name: Validate Gitflow Rules
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check branch naming convention
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Validating branch: $BRANCH_NAME"
+
+          # Define valid branch patterns
+          if [[ "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix)/[a-zA-Z0-9._-]+$ ]] || \
+             [[ "$BRANCH_NAME" =~ ^release/[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+             [[ "$BRANCH_NAME" == "develop" ]] || \
+             [[ "$BRANCH_NAME" == "main" ]]; then
+            echo "✅ Branch name follows gitflow convention"
+          else
+            echo "❌ Invalid branch name: $BRANCH_NAME"
+            echo ""
+            echo "Branch names must follow gitflow conventions:"
+            echo "  - feature/description"
+            echo "  - bugfix/description"
+            echo "  - hotfix/description"
+            echo "  - release/x.y.z (semantic versioning)"
+            echo "  - develop"
+            echo "  - main"
+            exit 1
+          fi
+
+      - name: Validate PR target branch
+        run: |
+          SOURCE_BRANCH="${{ github.head_ref }}"
+          TARGET_BRANCH="${{ github.base_ref }}"
+
+          echo "Source: $SOURCE_BRANCH → Target: $TARGET_BRANCH"
+
+          # Define valid gitflow merging rules
+          VALID=false
+
+          # Feature/bugfix → develop
+          if [[ "$SOURCE_BRANCH" =~ ^(feature|bugfix)/ ]] && [[ "$TARGET_BRANCH" == "develop" ]]; then
+            VALID=true
+          fi
+
+          # Hotfix → develop or main
+          if [[ "$SOURCE_BRANCH" =~ ^hotfix/ ]] && [[ "$TARGET_BRANCH" =~ ^(develop|main)$ ]]; then
+            VALID=true
+          fi
+
+          # Release → main
+          if [[ "$SOURCE_BRANCH" =~ ^release/ ]] && [[ "$TARGET_BRANCH" == "main" ]]; then
+            VALID=true
+          fi
+
+          if [ "$VALID" = true ]; then
+            echo "✅ Valid gitflow merge path"
+          else
+            echo "❌ Invalid gitflow merge path: $SOURCE_BRANCH → $TARGET_BRANCH"
+            echo ""
+            echo "Valid gitflow merge paths:"
+            echo "  - feature/* → develop"
+            echo "  - bugfix/* → develop"
+            echo "  - release/* → develop or main"
+            echo "  - hotfix/* → develop or main"
+            echo "  - develop → main"
+            exit 1
+          fi
+
+      - name: Check PR title format
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "Checking PR title: $PR_TITLE"
+
+          # Optional: Enforce conventional commits in PR titles
+          if [[ "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|perf|test|chore|ci)(\(.+\))?:\ .+ ]]; then
+            echo "✅ PR title follows conventional commit format"
+          else
+            echo "⚠️  PR title does not follow conventional commit format"
+            echo "Consider using: type(scope): description"
+            echo "Examples: feat(auth): add login, fix(api): resolve timeout"
+            # Uncomment below to make this a hard requirement
+            # exit 1
+          fi
+
+      - name: Validate semantic version (for release branches)
+        if: startsWith(github.head_ref, 'release/')
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          VERSION="${BRANCH_NAME#release/}"
+
+          echo "Validating version: $VERSION"
+
+          if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "✅ Valid semantic version: $VERSION"
+          else
+            echo "❌ Invalid semantic version: $VERSION"
+            echo "Release branches must use semantic versioning: release/x.y.z"
+            exit 1
+          fi
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "🎉 All gitflow validation checks passed!"
+          echo ""
+          echo "Branch: ${{ github.head_ref }}"
+          echo "Target: ${{ github.base_ref }}"
+          echo "PR: ${{ github.event.pull_request.title }}"
