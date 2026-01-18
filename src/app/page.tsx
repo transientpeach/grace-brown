@@ -7,7 +7,7 @@ const Home = () => {
       <div className="flex-1">
         <HomeMdx />
       </div>
-      <div className="flex">
+      <div className="flex self-start md:self-auto">
         <div className="h-64 w-64 overflow-hidden not-prose">
           <Image
             src="/images/photobooth-cropped.png"
