@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 const isProd = process.env.NODE_ENV === "production";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   basePath: isProd ? "/graces-site-next" : "",
   output: "export",
   distDir: "dist",
@@ -10,7 +10,17 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-};
+  experimental: {
+    turbo: {
+      rules: {
+        "*.mdx": {
+          loaders: ["@mdx-js/loader"],
+          as: "*.js",
+        },
+      },
+    },
+  },
+} as NextConfig;
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
