@@ -3,13 +3,13 @@ import createMDX from "@next/mdx";
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  basePath: isProd ? "/next-starter-blog" : "",
+  basePath: isProd ? "/graces-site-next" : "",
   output: "export",
   distDir: "dist",
   images: {
     unoptimized: true,
   },
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx", "mdx"],
 };
 
 const withMDX = createMDX({
