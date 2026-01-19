@@ -2,12 +2,13 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f2c9a6;
+  --foreground: #3d2817;
 }
 
 @theme {
   --color-negroni: #f2c9a6;
+  --color-peach: #ffb347;
 }
 
 @theme inline {
@@ -19,8 +20,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-orange-950);
+    --foreground: #f9e5d3;
   }
 }
 

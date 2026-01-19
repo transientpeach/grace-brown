@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Rubik, Inter_Tight } from "next/font/google";
+import { OverlayProvider } from "@/context/OverlayContext";
+import { getContentFileNameList } from "@/utils/getContentFileNameList";
+import { Header, Footer, MainContent } from "@/components";
 import "./globals.css";
-import { Header, Footer } from "@/components";
+
+const contentFileNameList = getContentFileNameList();
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -18,22 +22,36 @@ export const metadata: Metadata = {
   description: "researcher and educator",
 };
 
-export default function RootLayout({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
+  const navItemList: {
+    slug: string;
+    title: string;
+  }[] = await Promise.all(
+    contentFileNameList.map(async (fileName) => {
+      const slug = fileName.replace(".mdx", "");
+      const page = await import(`@/content/main/${fileName}`);
+      const title = page.metadata?.title ?? slug;
+      return { slug, title };
+    })
+  );
+
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${rubik.variable} antialiased`}>
         <div className="flex flex-col min-h-screen items-center w-full bg-negroni font-sans dark:bg-orange-950 ">
-          <Header />
-          <main className="w-full max-w-6xl py-32 px-16 prose prose-peach dark:prose-invert md:prose-lg">
-            {children}
-          </main>
-          <Footer />
+          <OverlayProvider>
+            <Header navItemList={navItemList} />
+            <MainContent>{children}</MainContent>
+            <Footer />
+          </OverlayProvider>
         </div>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
