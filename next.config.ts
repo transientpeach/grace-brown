@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -10,9 +11,18 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  experimental: {
-    mdxRs: true,
+  turbopack: {
+    rules: {
+      "*.mdx": {
+        loaders: ["@mdx-js/loader"],
+        as: "*.js",
+      },
+    },
   },
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+});
+
+export default withMDX(nextConfig);
